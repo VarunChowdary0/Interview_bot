@@ -65,3 +65,6 @@ desktop.ini
 # Package locks (optional - uncomment if you want to ignore)
 # package-lock.json
 # yarn.lock
+
+
+.claude/
