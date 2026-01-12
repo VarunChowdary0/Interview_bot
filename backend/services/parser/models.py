@@ -16,6 +16,7 @@ class FileType(Enum):
 class Education:
     """Education information extracted from resume."""
     college_name: str = ""
+    degree: str = ""
     department: str = ""
     cgpa: str = ""
     passout_year: str = ""
@@ -23,6 +24,7 @@ class Education:
     def to_dict(self) -> dict:
         return {
             "college_name": self.college_name,
+            "degree": self.degree,
             "department": self.department,
             "cgpa": self.cgpa,
             "passout_year": self.passout_year,
@@ -65,7 +67,7 @@ class ResumeData:
     contact: ContactInfo = field(default_factory=ContactInfo)
     skills: List[str] = field(default_factory=list)
     experience: Experience = field(default_factory=Experience)
-    education: Education = field(default_factory=Education)
+    education: List = field(default_factory=list)  # List of Education objects
     projects: List = field(default_factory=list)  # List of Project objects
     coding_profiles: List = field(default_factory=list)  # List of CodingProfile objects
     certifications: List = field(default_factory=list)  # List of Certification objects
@@ -83,7 +85,7 @@ class ResumeData:
             "phone": self.contact.phone,
             "skills": self.skills,
             "experience": self.experience.to_dict(),
-            "education": self.education.to_dict(),
+            "education": [e.to_dict() for e in self.education],
             "projects": [p.to_dict() for p in self.projects],
             "coding_profiles": [cp.to_dict() for cp in self.coding_profiles],
             "certifications": [c.to_dict() for c in self.certifications],

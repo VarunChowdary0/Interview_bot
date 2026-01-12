@@ -1,15 +1,11 @@
 from pydantic import BaseModel, Field
+from models.common import DifficultyLevel
 from enum import Enum
 
 class ConfidenceLevel(Enum):
     LOW = "LOW"
     MEDIUM = "MEDIUM"
     HIGH = "HIGH"
-
-class DifficultyLevel(Enum):
-    EASY = "EASY"
-    MEDIUM = "MEDIUM"
-    HARD = "HARD"
 
 class QuestionAction(Enum):
     ASK_FOLLOWUP = "ASK_FOLLOWUP" # Core concept missing, Answer shallow, Clarification needed
@@ -52,3 +48,9 @@ class LLM_Response(BaseModel):
 
     # Optional explanation for audit/debug
     reason: str | None = None
+
+
+class PrePlanner(BaseModel): # LLM Preplans the topics based on the [JD + Resume]
+    serial: int
+    skill: str
+    difficulty: DifficultyLevel

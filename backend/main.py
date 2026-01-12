@@ -1,8 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from routers import health
 from services.parser import parse_resume
-
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import text
+from db import get_db
 
 app =FastAPI(title="AI Interview Bot Server")
 
@@ -27,3 +29,15 @@ def test():
     data = parse_resume("C:\\PROGRAMS\\WEB_ALL\\Interview_bot\\backend\\services\\parser\\test-resumes\\22nd_nov_2025.pdf")
     # data = parse_resume("C:\\PROGRAMS\\WEB_ALL\\Interview_bot\\backend\\services\\parser\\test-resumes\\2026_jan_4.pdf")
     return data
+
+
+@app.get("/db-check")
+async def db_check(db: AsyncSession = Depends(get_db)):
+    res = await db.execute(text("SELECT 1"))
+    return {
+        "route": "/db-check",
+        "data": {
+            "db": "Connected",
+            "result": res.scalar()
+        }
+    }

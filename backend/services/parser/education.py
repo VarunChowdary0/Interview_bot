@@ -3,7 +3,7 @@
 import re
 import logging
 from datetime import datetime
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Set
 
 from .models import Education
 
@@ -100,9 +100,41 @@ def _tidy_institution_line(ln: str) -> str:
     return val
 
 
+def _extract_degree(text: str) -> str:
+    """Extract degree name from education entry."""
+    # Common degree patterns
+    degree_patterns = [
+        (r"\b(Ph\.?D\.?|Doctorate)\b", "PhD"),
+        (r"\b(M\.?Tech|MTech|Master of Technology)\b", "M.Tech"),
+        (r"\b(M\.?E\.?|ME|Master of Engineering)\b", "M.E."),
+        (r"\b(M\.?S\.?|MS|Master of Science)\b", "M.S."),
+        (r"\b(M\.?B\.?A\.?|MBA)\b", "MBA"),
+        (r"\b(M\.?C\.?A\.?|MCA)\b", "MCA"),
+        (r"\b(M\.?Sc\.?|MSc)\b", "M.Sc."),
+        (r"\b(M\.?A\.?)\b", "M.A."),
+        (r"\b(B\.?Tech|BTech|Bachelor of Technology)\b", "B.Tech"),
+        (r"\b(B\.?E\.?|BE|Bachelor of Engineering)\b", "B.E."),
+        (r"\b(B\.?S\.?|BS|Bachelor of Science)\b", "B.S."),
+        (r"\b(B\.?Sc\.?|BSc)\b", "B.Sc."),
+        (r"\b(B\.?C\.?A\.?|BCA)\b", "BCA"),
+        (r"\b(B\.?B\.?A\.?|BBA)\b", "BBA"),
+        (r"\b(B\.?Com\.?|BCom)\b", "B.Com"),
+        (r"\b(B\.?A\.?)\b", "B.A."),
+        (r"\b(Diploma)\b", "Diploma"),
+        (r"\b(12th|XII|Intermediate|Higher Secondary|HSC)\b", "Intermediate"),
+        (r"\b(10th|X|SSC|Secondary|Matriculation)\b", "SSC"),
+    ]
+
+    for pattern, degree_name in degree_patterns:
+        if re.search(pattern, text, re.IGNORECASE):
+            return degree_name
+
+    return ""
+
+
 def _parse_education_entry(block: str) -> Dict[str, str]:
     """Parse a single education entry block."""
-    fields = {"college_name": "", "department": "", "cgpa": "", "passout_year": ""}
+    fields = {"college_name": "", "degree": "", "department": "", "cgpa": "", "passout_year": ""}
     lines = [ln.strip() for ln in block.splitlines() if ln.strip()]
     joined = " \n ".join(lines)
 
@@ -130,6 +162,9 @@ def _parse_education_entry(block: str) -> Dict[str, str]:
 
     # Find institution
     fields["college_name"] = _extract_institution(lines, joined)
+
+    # Extract degree
+    fields["degree"] = _extract_degree(joined)
 
     # Extract department
     fields["department"] = _extract_department(joined)
@@ -281,17 +316,17 @@ def _extract_grade(joined: str) -> str:
     return ""
 
 
-def extract_education(text: str) -> Education:
-    """Extract education information from resume text.
+def extract_education(text: str) -> List[Education]:
+    """Extract all education entries from resume text.
 
-    Prioritizes higher education (B.Tech, M.Tech, etc.) over school education.
-    For same degree level, prefers Present/Current timeline, then highest year.
+    Parses all education entries and returns them sorted by degree level
+    (higher education first) and then by year (most recent first).
 
     Args:
         text: Raw resume text
 
     Returns:
-        Education object with extracted information
+        List of Education objects
     """
     # Find education section
     edu_sec_regex = re.compile(
@@ -333,54 +368,44 @@ def extract_education(text: str) -> Education:
     if not entries:
         entries = [edu_block]
 
-    logger.debug(f"Found {len(entries)} education entries to evaluate")
+    logger.debug(f"Found {len(entries)} education entries to parse")
 
-    # Select best entry
-    best: Optional[Dict[str, str]] = None
-    best_year: int = -1
-    has_present: bool = False
-    best_degree_level: int = 0
+    # Parse all entries
+    education_list: List[Education] = []
+    seen_colleges: set = set()
 
     for entry in entries:
         fields = _parse_education_entry(entry)
-        is_present = bool(re.search(r"\b(present|current)\b", entry.lower()))
+
+        # Skip if no meaningful data
+        if not fields["college_name"] and not fields["degree"]:
+            continue
+
+        # Skip duplicates (same college)
+        college_key = fields["college_name"].lower().strip()
+        if college_key and college_key in seen_colleges:
+            continue
+        if college_key:
+            seen_colleges.add(college_key)
+
+        # Get degree level and year for sorting
         degree_level = _get_degree_level(entry)
-
         try:
-            y = int(fields["passout_year"]) if fields["passout_year"] else -1
+            year = int(fields["passout_year"]) if fields["passout_year"] else 0
         except ValueError:
-            y = -1
+            year = 0
 
-        should_update = False
-        if degree_level > best_degree_level:
-            should_update = True
-        elif degree_level == best_degree_level:
-            if is_present and not has_present:
-                should_update = True
-            elif is_present and has_present and y > best_year:
-                should_update = True
-            elif not is_present and not has_present and y > best_year:
-                should_update = True
-
-        if should_update:
-            best_year = y
-            best = fields
-            has_present = is_present
-            best_degree_level = degree_level
-
-    if best:
-        return Education(
-            college_name=best.get("college_name", ""),
-            department=best.get("department", ""),
-            cgpa=best.get("cgpa", ""),
-            passout_year=best.get("passout_year", ""),
+        edu = Education(
+            college_name=fields.get("college_name", ""),
+            degree=fields.get("degree", ""),
+            department=fields.get("department", ""),
+            cgpa=fields.get("cgpa", ""),
+            passout_year=fields.get("passout_year", ""),
         )
+        education_list.append((edu, degree_level, year))
 
-    # Fallback
-    fields = _parse_education_entry(edu_block)
-    return Education(
-        college_name=fields.get("college_name", ""),
-        department=fields.get("department", ""),
-        cgpa=fields.get("cgpa", ""),
-        passout_year=fields.get("passout_year", ""),
-    )
+    # Sort by degree level (descending) then by year (descending)
+    education_list.sort(key=lambda x: (-x[1], -x[2]))
+
+    # Return just the Education objects
+    return [edu for edu, _, _ in education_list]
