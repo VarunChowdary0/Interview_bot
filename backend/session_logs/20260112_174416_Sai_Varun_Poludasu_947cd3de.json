@@ -1,0 +1,399 @@
+{
+  "session_id": "947cd3de-cc28-4fef-a5ea-50f585111bf5",
+  "timestamp": "2026-01-12T17:44:16.991459",
+  "candidate": {
+    "name": "Sai Varun Poludasu",
+    "email": "saivarunchowdarypoludasu4248@gmail.com"
+  },
+  "job": {
+    "company_name": "TechCorp",
+    "title": "Software Engineer",
+    "description": "We are looking for a skilled software engineer to join our team.",
+    "expirence": "0-2 years",
+    "level": "FRESHER",
+    "responsibilities": [
+      "Write clean code",
+      "Collaborate with team",
+      "Participate in code reviews"
+    ],
+    "primary_skills": [
+      "Python",
+      "JavaScript",
+      "SQL"
+    ],
+    "secondary_have": [
+      "React",
+      "Node.js"
+    ],
+    "soft_skills": [
+      "Communication",
+      "Problem Solving",
+      "Team Collaboration"
+    ],
+    "skill_weights": {
+      "Python": 1.0,
+      "JavaScript": 0.8,
+      "SQL": 0.6
+    },
+    "difficulty_policy": {
+      "start_level": "EASY",
+      "max_level": "MEDIUM",
+      "increase_on_good_answer": true,
+      "decrease_on_struggle": true
+    },
+    "question_policy": {
+      "max_questions": 3,
+      "max_followup_per_question": 2,
+      "time_limit": 300
+    },
+    "evaluation_rubric": {
+      "correctness": 0.5,
+      "depth": 0.3,
+      "communication": 0.2
+    },
+    "pass_criteria": {
+      "minimum_overall_score": 0.6,
+      "mandatory_skills": [
+        "Python"
+      ],
+      "minimum_communication_score": 0.5
+    }
+  },
+  "state": "COMPLETED",
+  "started_at": "2026-01-12T17:32:31.763575",
+  "ended_at": "2026-01-12T17:44:16.989136",
+  "duration_seconds": 705.225561,
+  "questions_asked": 8,
+  "preplanned_topics": [
+    {
+      "serial": 1,
+      "skill": "Python",
+      "difficulty": "EASY"
+    },
+    {
+      "serial": 2,
+      "skill": "JavaScript",
+      "difficulty": "EASY"
+    },
+    {
+      "serial": 3,
+      "skill": "SQL",
+      "difficulty": "MEDIUM"
+    }
+  ],
+  "messages": [
+    {
+      "id": "01a1cd98-e5de-404a-aa57-e97e66b7ef60",
+      "role": "interviewer",
+      "content": "Hi Sai Varun, great to meet you! I'm excited to have a chat with you about the Software Engineer role here at TechCorp. We'll dive into your experiences and some technical topics, but let's keep it relaxed and conversational. Looking forward to our discussion!",
+      "timestamp": "2026-01-12T17:32:36.134378",
+      "metadata": null
+    },
+    {
+      "id": "dd2d576c-dbbf-47ec-9a66-243fef4efd91",
+      "role": "interviewer",
+      "content": "Hi Sai Varun, great to meet you! I'm excited to have a chat with you about the Software Engineer role here at TechCorp. We'll dive into your experiences and some technical topics, but let's keep it relaxed and conversational. Looking forward to our discussion!\n\nSai Varun, I noticed during your internship at Ediglobe AI, you worked on a car price prediction system using Python. When you were implementing the regression models, how did you decide which Python libraries to use for data analysis and why?",
+      "timestamp": "2026-01-12T17:32:44.295159",
+      "metadata": {
+        "question_id": "a1b2c3d4-e5f6-7890-ghij-klmnopqrstuv",
+        "skill": "Python"
+      }
+    },
+    {
+      "id": "405fe385-265c-4285-8038-427f59ade620",
+      "role": "candidate",
+      "content": "Great to meet you too\nDuring the Ediglobe AI internship, my main goal was to keep things simple, reliable, and easy to experiment with, so that guided my choice of Python libraries.\n\nFor data analysis and preprocessing, I mainly used Pandas and NumPy. Pandas was very useful for loading the dataset, cleaning missing values, handling categorical features, and doing quick exploratory analysis. NumPy helped with numerical operations and making sure the data was in a format that worked well with the models.\n\nFor model building, I chose scikit-learn because it provides clean and well-documented implementations of regression algorithms like linear regression and decision trees, and it integrates smoothly with Pandas dataframes. It also made it easy to compare different models and do things like train-test splits and basic evaluation without writing a lot of custom code.",
+      "timestamp": "2026-01-12T17:34:44.473738",
+      "metadata": null
+    },
+    {
+      "id": "0509bd41-c388-41bb-b2ff-a55b6d0dcc1b",
+      "role": "interviewer",
+      "content": "You mentioned using Pandas and scikit-learn for your car price prediction system. What would happen if you had to handle a much larger dataset that didn't fit into memory? How would your choice of libraries or approach change?",
+      "timestamp": "2026-01-12T17:34:50.849119",
+      "metadata": {
+        "question_id": "generate-new-uuid",
+        "skill": "Python"
+      }
+    },
+    {
+      "id": "75e23338-c050-4abb-ad1b-25569f579384",
+      "role": "candidate",
+      "content": "If the dataset didn’t fit into memory, my approach would definitely change compared to using plain Pandas. Pandas works well for moderate-sized datasets, but it’s not ideal once everything can’t be loaded into RAM.\n\nIn that case, I’d first look at processing the data in chunks instead of loading it all at once. Pandas itself supports chunk-based reading, which can help for preprocessing and basic analysis without exhausting memory.\n\nIf the data size was significantly larger, I’d consider using distributed or out-of-core tools like Dask, which has a very similar API to Pandas but is designed to handle larger-than-memory datasets. That would let me scale the same kind of operations without completely rewriting the logic.",
+      "timestamp": "2026-01-12T17:36:44.836796",
+      "metadata": null
+    },
+    {
+      "id": "9b56e43b-bc3e-4206-9cb9-147a057a0167",
+      "role": "interviewer",
+      "content": "You mentioned using Dask for handling larger-than-memory datasets. How would you handle the scalability of the machine learning models themselves, particularly with scikit-learn?",
+      "timestamp": "2026-01-12T17:36:49.589336",
+      "metadata": {
+        "question_id": "generate-new-uuid",
+        "skill": "Python"
+      }
+    },
+    {
+      "id": "893d9344-f6de-41ea-8ba3-5fc8ebecb30f",
+      "role": "candidate",
+      "content": "That’s an interesting follow-up.\n\nWith scikit-learn, scalability becomes more about choosing the right training strategy rather than just the right library, since most scikit-learn models are designed to work in memory.\n\nFor larger datasets, the first thing I’d do is choose models that support incremental learning. Algorithms like linear models or stochastic gradient–based approaches in scikit-learn allow training using partial_fit, which means the model can be updated batch by batch instead of loading all the data at once. This fits well with chunked data processing using tools like Dask or even plain Pandas chunks.\n\nIf the dataset is extremely large, I’d also focus on feature reduction and sampling—for example, reducing dimensionality, removing low-impact features, or training on representative samples first to validate assumptions before scaling up.\n\nAnother practical approach is parallelization. scikit-learn supports parallel execution for certain operations (like cross-validation and some estimators), so I’d take advantage of that to speed up training on multi-core machines.\n\nIf scikit-learn started to feel limiting, that would be a signal to either wrap it with distributed tools like Dask-ML or move to frameworks that are more naturally scalable. But as a first step, careful algorithm choice, incremental learning, and resource-aware training would be my go-to strategies.",
+      "timestamp": "2026-01-12T17:38:23.318226",
+      "metadata": null
+    },
+    {
+      "id": "54356e71-80a7-4ed5-a3e5-6225174ede60",
+      "role": "interviewer",
+      "content": "I see you've worked with React.js and Next.js at Redsage Pvt. Ltd. These frameworks rely heavily on JavaScript. When you were developing with Next.js, how did you handle state management in your application, and what role did JavaScript play in that process?",
+      "timestamp": "2026-01-12T17:38:30.398417",
+      "metadata": {
+        "question_id": "f3c2b4e0-7df1-4c3b-9a34-2c4e7aab9f4b",
+        "skill": "JavaScript"
+      }
+    },
+    {
+      "id": "b9e9995a-0145-45e6-8ec8-dd334762e251",
+      "role": "candidate",
+      "content": "During my time at Redsage as a SDE intern I initially assigned to the frontend roles, And for the state management I have use both the inbuild hooks like \"useState\" for local state, and for maintaing global state i have use \"useContext\", \"Redux\" and \"Zustand\". Knowing the JavaScript have made life easier when i have to use the new frameworks like redux and zustanss.",
+      "timestamp": "2026-01-12T17:42:28.088888",
+      "metadata": null
+    },
+    {
+      "id": "b56ef9a1-5746-410c-ab1b-4a88667bbb83",
+      "role": "interviewer",
+      "content": "You mentioned using Redux and Zustand for state management. How does JavaScript specifically facilitate the implementation of Redux in a Next.js app?",
+      "timestamp": "2026-01-12T17:42:32.279604",
+      "metadata": {
+        "question_id": "generate-new-uuid",
+        "skill": "JavaScript"
+      }
+    },
+    {
+      "id": "5a0e1c67-7dc8-4cc4-be5a-7ac7579cfb2c",
+      "role": "candidate",
+      "content": "JavaScript plays a key role in making Redux work smoothly inside a Next.js app because Redux itself is fundamentally a JavaScript pattern built around functions and immutable data.\n\nAt a basic level, JavaScript enables Redux through pure functions and object-based state management. Reducers are just JavaScript functions that take the current state and an action object, and return a new state. Because JavaScript makes it easy to work with objects, arrays, and the spread operator, updating state immutably becomes straightforward and predictable.",
+      "timestamp": "2026-01-12T17:43:13.968237",
+      "metadata": null
+    },
+    {
+      "id": "c854d919-2fea-4536-93e6-3805517e24d0",
+      "role": "interviewer",
+      "content": "You mentioned how JavaScript facilitates working with Redux through pure functions and immutable data. How would you set up the Redux store in a Next.js app, and what role does middleware play in this setup?",
+      "timestamp": "2026-01-12T17:43:18.524792",
+      "metadata": {
+        "question_id": "generate-new-uuid",
+        "skill": "JavaScript"
+      }
+    },
+    {
+      "id": "322c7a4a-d00c-4c5f-96db-81a30eef43c1",
+      "role": "candidate",
+      "content": "please end this",
+      "timestamp": "2026-01-12T17:43:43.924854",
+      "metadata": null
+    },
+    {
+      "id": "4d571993-7210-4047-8cf3-2b2ae8fca32f",
+      "role": "interviewer",
+      "content": "I noticed you worked on a car price prediction system during your Ediglobe AI Internship. Let's imagine you had to store a large dataset of car features and prices in a SQL database. As this dataset grows, you start noticing that your queries are becoming slower. How would you diagnose and improve the performance of these queries?",
+      "timestamp": "2026-01-12T17:43:50.213389",
+      "metadata": {
+        "question_id": "b9f5a0b3-92c7-4a23-8f07-9e1f0605a8f5",
+        "skill": "SQL"
+      }
+    },
+    {
+      "id": "7918e2c6-30a6-4b85-acb9-4c84408bf77a",
+      "role": "candidate",
+      "content": "end",
+      "timestamp": "2026-01-12T17:43:53.704055",
+      "metadata": null
+    },
+    {
+      "id": "b4a114f2-75fd-4629-9566-785de242a77b",
+      "role": "interviewer",
+      "content": "I understand you might have missed responding. Let's start with a basic aspect: How would you use indexing to improve query performance in a growing SQL database?",
+      "timestamp": "2026-01-12T17:43:59.517519",
+      "metadata": {
+        "question_id": "generate-new-uuid",
+        "skill": "SQL"
+      }
+    },
+    {
+      "id": "debbe4b5-d1a4-4e97-8cd3-73181cffafa4",
+      "role": "candidate",
+      "content": "end please",
+      "timestamp": "2026-01-12T17:44:09.094552",
+      "metadata": null
+    },
+    {
+      "id": "8fb3a5c8-c11e-428e-9ebf-6326015662db",
+      "role": "interviewer",
+      "content": "Thank you, Sai Varun Poludasu, for taking the time to interview with us today for the Software Engineer position. We have covered all the topics, including Python, JavaScript, and SQL, and the interview is now complete. We appreciate your effort and will be generating a report to discuss the next steps in our hiring process.",
+      "timestamp": "2026-01-12T17:44:16.989207",
+      "metadata": null
+    }
+  ],
+  "evaluations": [
+    {
+      "question_ref": {
+        "question_id": "a1b2c3d4-e5f6-7890-ghij-klmnopqrstuv",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "Python",
+      "correctness_score": 0.8,
+      "depth_score": 0.7,
+      "communication_score": 0.8,
+      "observed_concepts": [
+        "Pandas",
+        "NumPy",
+        "scikit-learn"
+      ],
+      "missing_concepts": [
+        "alternative libraries",
+        "advanced regression techniques"
+      ],
+      "confidence_level": "HIGH",
+      "notes": "Good understanding of basic library usage, but lacks exploration of alternatives."
+    },
+    {
+      "question_ref": {
+        "question_id": "generate-new-uuid",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "Python",
+      "correctness_score": 0.75,
+      "depth_score": 0.65,
+      "communication_score": 0.8,
+      "observed_concepts": [
+        "memory management",
+        "alternative libraries"
+      ],
+      "missing_concepts": [
+        "scalability with scikit-learn"
+      ],
+      "confidence_level": "MEDIUM",
+      "notes": "Good understanding but needs deeper probe on scalability with scikit-learn"
+    },
+    {
+      "question_ref": {
+        "question_id": "b7c0a5aa-5d7a-4b6f-bf9c-8f7e5e7a9c9f",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "Python",
+      "correctness_score": 0.75,
+      "depth_score": 0.65,
+      "communication_score": 0.8,
+      "observed_concepts": [
+        "scikit-learn",
+        "incremental learning",
+        "parallelization"
+      ],
+      "missing_concepts": [
+        "distributed computing with Dask-ML"
+      ],
+      "confidence_level": "MEDIUM",
+      "notes": "The candidate demonstrated a good understanding of handling scalability with scikit-learn, focusing on incremental learning and parallelization. However, they could explore distributed computing with Dask-ML."
+    },
+    {
+      "question_ref": {
+        "question_id": "1234-5678-9101",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "JavaScript",
+      "correctness_score": 0.6,
+      "depth_score": 0.5,
+      "communication_score": 0.6,
+      "observed_concepts": [
+        "useState",
+        "useContext",
+        "Redux",
+        "Zustand"
+      ],
+      "missing_concepts": [
+        "JavaScript role in state management"
+      ],
+      "confidence_level": "MEDIUM",
+      "notes": "Candidate mentioned use of various state management tools but did not elaborate on JavaScript's role in these processes."
+    },
+    {
+      "question_ref": {
+        "question_id": "generate-new-uuid",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "JavaScript",
+      "correctness_score": 0.75,
+      "depth_score": 0.65,
+      "communication_score": 0.8,
+      "observed_concepts": [
+        "pure functions",
+        "immutable data"
+      ],
+      "missing_concepts": [
+        "middleware integration",
+        "Redux store initialization in Next.js"
+      ],
+      "confidence_level": "MEDIUM",
+      "notes": "The candidate has a good grasp of the basic concepts of Redux in JavaScript but didn't mention important aspects like middleware or Redux store setup in a Next.js environment."
+    },
+    {
+      "question_ref": {
+        "question_id": "generate-new-uuid",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "JavaScript",
+      "correctness_score": 0.0,
+      "depth_score": 0.0,
+      "communication_score": 0.0,
+      "observed_concepts": [],
+      "missing_concepts": [
+        "Redux store setup",
+        "middleware"
+      ],
+      "confidence_level": "LOW",
+      "notes": "Candidate did not provide an answer related to the question."
+    },
+    {
+      "question_ref": {
+        "question_id": "b9f5a0b3-92c7-4a23-8f07-9e1f0605a8f5",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "SQL",
+      "correctness_score": 0.0,
+      "depth_score": 0.0,
+      "communication_score": 0.0,
+      "observed_concepts": [],
+      "missing_concepts": [
+        "query optimization",
+        "indexing",
+        "database performance tuning"
+      ],
+      "confidence_level": "LOW",
+      "notes": "Candidate did not provide any response, so follow-up is needed to assess skills."
+    },
+    {
+      "question_ref": {
+        "question_id": "generate-new-uuid",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "SQL",
+      "correctness_score": 0.0,
+      "depth_score": 0.0,
+      "communication_score": 0.0,
+      "observed_concepts": [],
+      "missing_concepts": [
+        "indexing",
+        "query optimization"
+      ],
+      "confidence_level": "LOW",
+      "notes": "The candidate did not provide a relevant response to the question."
+    }
+  ]
+}

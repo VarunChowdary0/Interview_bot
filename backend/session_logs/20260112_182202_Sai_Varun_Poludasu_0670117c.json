@@ -1,0 +1,236 @@
+{
+  "session_id": "0670117c-fc3e-46e2-82a7-ab418879fc8e",
+  "timestamp": "2026-01-12T18:22:02.677283",
+  "candidate": {
+    "name": "Sai Varun Poludasu",
+    "email": "saivarunchowdarypoludasu4248@gmail.com"
+  },
+  "job": {
+    "company_name": "TechCorp",
+    "title": "Software Engineer",
+    "description": "We are looking for a skilled software engineer to join our team.",
+    "expirence": "0-2 years",
+    "level": "FRESHER",
+    "responsibilities": [
+      "Write clean code",
+      "Collaborate with team",
+      "Participate in code reviews"
+    ],
+    "primary_skills": [
+      "Python",
+      "JavaScript",
+      "SQL"
+    ],
+    "secondary_have": [
+      "React",
+      "Node.js"
+    ],
+    "soft_skills": [
+      "Responsible for design and development of high end, robust, scalable products that disrupt the market",
+      "Technically-intense role with primary focus on building cool products in a niche domain",
+      "Analyzing code segments regularly."
+    ],
+    "skill_weights": {
+      "Python": 1.0,
+      "JavaScript": 0.8,
+      "SQL": 0.6
+    },
+    "difficulty_policy": {
+      "start_level": "EASY",
+      "max_level": "MEDIUM",
+      "increase_on_good_answer": true,
+      "decrease_on_struggle": true
+    },
+    "question_policy": {
+      "max_questions": 4,
+      "max_followup_per_question": 2,
+      "time_limit": 300
+    },
+    "evaluation_rubric": {
+      "correctness": 0.5,
+      "depth": 0.3,
+      "communication": 0.2
+    },
+    "pass_criteria": {
+      "minimum_overall_score": 0.6,
+      "mandatory_skills": [
+        "Python"
+      ],
+      "minimum_communication_score": 0.5
+    }
+  },
+  "state": "COMPLETED",
+  "started_at": "2026-01-12T18:17:27.611781",
+  "ended_at": "2026-01-12T18:22:02.674770",
+  "duration_seconds": 275.062989,
+  "questions_asked": 4,
+  "preplanned_topics": [
+    {
+      "serial": 1,
+      "skill": "JavaScript",
+      "difficulty": "EASY"
+    },
+    {
+      "serial": 2,
+      "skill": "Python",
+      "difficulty": "EASY"
+    },
+    {
+      "serial": 3,
+      "skill": "SQL",
+      "difficulty": "EASY"
+    },
+    {
+      "serial": 4,
+      "skill": "React",
+      "difficulty": "MEDIUM"
+    }
+  ],
+  "messages": [
+    {
+      "id": "d942061b-976a-43d9-a24e-daeeaaacddac",
+      "role": "interviewer",
+      "content": "Hi Sai Varun! Great to meet you - I'm really excited to chat about the software engineer position and learn more about your background. I hope you're having a good day so far, and thanks for taking the time to connect with us at TechCorp.",
+      "timestamp": "2026-01-12T18:17:31.990425",
+      "metadata": null
+    },
+    {
+      "id": "36fffcdd-c7ce-49f0-b038-aeb4bd3a83ee",
+      "role": "interviewer",
+      "content": "Hi Sai Varun! Great to meet you - I'm really excited to chat about the software engineer position and learn more about your background. I hope you're having a good day so far, and thanks for taking the time to connect with us at TechCorp.\n\nLooking at your chat-room project where you used Web Sockets and Node.js, let's say you needed to add a feature where users can send emoji reactions to messages. You have a message object like this: `{id: 123, content: 'Hello everyone!', reactions: []}`. Can you write a JavaScript function that takes a message object, an emoji string, and a user ID, and adds the reaction to the message? If the same user tries to add the same emoji again, it should remove their previous reaction instead.",
+      "timestamp": "2026-01-12T18:17:40.777453",
+      "metadata": {
+        "question_id": "js-easy-001",
+        "skill": "JavaScript"
+      }
+    },
+    {
+      "id": "6c6e6df7-abfd-4044-b81c-470620819b70",
+      "role": "candidate",
+      "content": "I’ll write this in a clear, simple JavaScript way, like I would in a real Node.js / WebSocket project.\n\nfunction toggleReaction(message, emoji, userId) {\n  // Find if the same user already reacted with the same emoji\n  const index = message.reactions.findIndex(\n    reaction => reaction.emoji === emoji && reaction.userId === userId\n  );\n\n  if (index !== -1) {\n    // Reaction exists → remove it\n    message.reactions.splice(index, 1);\n  } else {\n    // Reaction does not exist → add it\n    message.reactions.push({ emoji, userId });\n  }\n\n  return message;\n}",
+      "timestamp": "2026-01-12T18:19:08.917330",
+      "metadata": null
+    },
+    {
+      "id": "b8428208-d10c-47fc-aae8-22cc7174c3a0",
+      "role": "interviewer",
+      "content": "Good solution! Now what if multiple users could react with the same emoji to the same message? How would you modify your function to handle a structure where reactions are grouped by emoji, like `{reactions: {'👍': ['user1', 'user2'], '❤️': ['user3']}}`?",
+      "timestamp": "2026-01-12T18:19:17.097713",
+      "metadata": {
+        "question_id": "js-easy-001-f1",
+        "skill": "JavaScript"
+      }
+    },
+    {
+      "id": "4998fd02-af98-404f-a313-6a3328568e78",
+      "role": "candidate",
+      "content": "function toggleReaction(message, emoji, userId) {\n  // Initialize reactions object if it doesn't exist\n  if (!message.reactions) {\n    message.reactions = {};\n  }\n\n  // Initialize emoji array if it doesn't exist\n  if (!message.reactions[emoji]) {\n    message.reactions[emoji] = [];\n  }\n\n  const users = message.reactions[emoji];\n  const index = users.indexOf(userId);\n\n  if (index !== -1) {\n    // User already reacted with this emoji → remove\n    users.splice(index, 1);\n\n    // If no users left for this",
+      "timestamp": "2026-01-12T18:19:47.531942",
+      "metadata": null
+    },
+    {
+      "id": "4157e49c-3a33-412e-8619-eda545a939b1",
+      "role": "interviewer",
+      "content": "Looking at your chat-room project, let's switch to Python for a moment. You'd likely need to validate user messages before broadcasting them. Write a Python function that takes a message string and returns True if it's valid (between 1-500 characters, contains at least one non-whitespace character, and doesn't contain any HTML tags like <script> or <img>). How would you implement this validation?",
+      "timestamp": "2026-01-12T18:20:00.283550",
+      "metadata": {
+        "question_id": "uuid_001",
+        "skill": "Python"
+      }
+    },
+    {
+      "id": "478b74a3-a846-4477-aec2-5d9eaa0d0860",
+      "role": "candidate",
+      "content": "I’ll implement this in a clean, practical way, similar to what I’d actually use in a backend service before broadcasting messages.",
+      "timestamp": "2026-01-12T18:21:00.885145",
+      "metadata": null
+    },
+    {
+      "id": "06e08f2d-c3b3-4d1a-8375-fc4e1c7554af",
+      "role": "interviewer",
+      "content": "For your Chat-room project, you mentioned using MongoDB, but let's say you need to add SQL analytics to track message statistics. Write a SQL query to find the top 3 most active users (by message count) in each chat room, assuming you have tables: `users(id, username)`, `rooms(id, room_name)`, and `messages(id, user_id, room_id, content, created_at)`. Show the room name, username, and message count.",
+      "timestamp": "2026-01-12T18:21:12.476278",
+      "metadata": {
+        "question_id": "550e1bdf-4e2f-4c2a-8b6b-9e5d8f7c3a2b",
+        "skill": "SQL"
+      }
+    },
+    {
+      "id": "0fac0009-8c99-46ab-b845-243111a0d28c",
+      "role": "candidate",
+      "content": "For your Chat-room project, you mentioned using MongoDB, but let's say you need to add SQL analytics to track message statistics. Write a SQL query to find the top 3 most active users (by message count) in each chat room, assuming you have tables: `users(id, username)`, `rooms(id, room_name)`, and `messages(id, user_id, room_id, content, created_at)`. Show the room name, username, and message count.",
+      "timestamp": "2026-01-12T18:21:57.364973",
+      "metadata": null
+    },
+    {
+      "id": "e207ac15-465b-4440-9edd-1d29f80728c7",
+      "role": "interviewer",
+      "content": "Thank you, Sai Varun, for taking the time to discuss your experience with JavaScript, Python, and SQL today - your responses demonstrated solid technical understanding across these key areas for the Software Engineer role. That concludes our interview, and I'll now be generating a comprehensive report based on our conversation covering all 4 questions we discussed. You should expect to hear about next steps from our team within the coming days, and I appreciate your interest in joining our organization.",
+      "timestamp": "2026-01-12T18:22:02.674843",
+      "metadata": null
+    }
+  ],
+  "evaluations": [
+    {
+      "question_ref": {
+        "question_id": "js-easy-001",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "JavaScript",
+      "correctness_score": 0.85,
+      "depth_score": 0.7,
+      "communication_score": 0.9,
+      "observed_concepts": [
+        "array methods (findIndex, splice, push)",
+        "object manipulation",
+        "conditional logic",
+        "function parameters",
+        "destructuring in push"
+      ],
+      "missing_concepts": [
+        "error handling",
+        "input validation"
+      ],
+      "confidence_level": "HIGH",
+      "notes": "Clean, correct implementation with proper toggle logic and good naming conventions"
+    },
+    {
+      "question_ref": {
+        "question_id": "js-easy-001-f1",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "JavaScript",
+      "correctness_score": 0.5,
+      "depth_score": 0.5,
+      "communication_score": 0.5,
+      "observed_concepts": [],
+      "missing_concepts": [],
+      "confidence_level": "LOW",
+      "notes": "Fallback evaluation due to parsing error"
+    },
+    {
+      "question_ref": {
+        "question_id": "uuid_001",
+        "parent_question_id": null,
+        "question_type": "main"
+      },
+      "skill": "Python",
+      "correctness_score": 0.0,
+      "depth_score": 0.0,
+      "communication_score": 0.2,
+      "observed_concepts": [],
+      "missing_concepts": [
+        "string methods",
+        "conditionals",
+        "input validation",
+        "string manipulation",
+        "length checking",
+        "HTML tag detection"
+      ],
+      "confidence_level": "LOW",
+      "notes": "Candidate provided only a brief statement of intent without any actual code implementation or technical details"
+    }
+  ]
+}

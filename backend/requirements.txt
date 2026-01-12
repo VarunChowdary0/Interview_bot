@@ -25,3 +25,19 @@ asyncpg==0.31.0
 greenlet==3.3.0
 python-dotenv==1.2.1
 SQLAlchemy==2.0.45
+
+# LLM Providers
+openai>=1.0.0
+anthropic>=0.18.0
+
+# Configuration
+pydantic-settings>=2.0.0
+
+# PDF Generation
+reportlab>=4.0.0
+
+# Async HTTP
+httpx>=0.25.0
+
+# File uploads
+python-multipart>=0.0.6

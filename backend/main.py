@@ -1,23 +1,34 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from routers import health
+from routers.resume import router as resume_router
+from routers.interview import router as interview_router
+from routers.report import router as report_router
 from services.parser import parse_resume
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 from db import get_db
 
-app =FastAPI(title="AI Interview Bot Server")
+app = FastAPI(
+    title="AI Interview Bot Server",
+    description="AI-powered technical interview system",
+    version="1.0.0",
+)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=['*'],
+    allow_headers=["*"],
     expose_headers=["*"],
 )
 
+# Include routers
 app.include_router(health.router, prefix="/health")
+app.include_router(resume_router)
+app.include_router(interview_router)
+app.include_router(report_router)
 
 @app.get("/")
 def root():

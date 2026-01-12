@@ -27,7 +27,7 @@ class EvaluationRubric(BaseModel):
 class PassCriteria(BaseModel):
     minimum_overall_score: float
     mandatory_skills: Optional[list[str]] = []
-    minimum_communication_score = float
+    minimum_communication_score: float
 
 class JobData(BaseModel):
     company_name: str

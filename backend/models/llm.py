@@ -14,11 +14,13 @@ class QuestionAction(Enum):
 
 class Question(BaseModel):
     id: str
-    text: str
-    type: str
+    text: str  # The spoken/conversational question
+    type: str  # "main" or "followup"
     expected_concepts: list[str]
     skill: str
     difficulty: DifficultyLevel | None = None
+    is_coding: bool = False  # True if this requires writing code
+    problem_statement: str | None = None  # For coding questions: displayed separately in UI
 
 class QuestionRef(BaseModel):
     question_id: str

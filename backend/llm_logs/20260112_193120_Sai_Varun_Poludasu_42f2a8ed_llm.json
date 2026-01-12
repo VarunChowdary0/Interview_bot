@@ -1,0 +1,32 @@
+{
+  "session_id": "42f2a8ed-e764-4fd3-ad2e-db770e598a90",
+  "timestamp": "2026-01-12T19:31:20.526066",
+  "candidate_name": "Sai Varun Poludasu",
+  "model": "claude-sonnet-4-20250514",
+  "summary": {
+    "total_calls": 1,
+    "total_input_tokens": 114,
+    "total_output_tokens": 84,
+    "total_tokens": 198,
+    "total_latency_ms": 4068,
+    "avg_latency_ms": 4068
+  },
+  "calls": [
+    {
+      "call_type": "conclusion",
+      "timestamp": "2026-01-12T19:31:20.522690",
+      "model": "claude-sonnet-4-20250514",
+      "prompt_messages": [
+        {
+          "role": "user",
+          "content": "Generate a professional interview closing.\n\nCandidate: Sai Varun Poludasu\nRole: Software Engineer\nTopics Covered: Python, JavaScript, MySQL, Java, React, Node.js, Spring\nTotal Questions: 8\n\nRequirements:\n- Thank them genuinely\n- Confirm the interview is complete\n- Mention next steps (report generation)\n- Encouraging tone regardless of performance\n- 2-3 sentences, plain text only\n- Do NOT reveal any scores or decisions\n"
+        }
+      ],
+      "response": "Thank you, Sai Varun, for taking the time to discuss your experience with Python, JavaScript, MySQL, Java, React, Node.js, and Spring today. That concludes our technical interview, and I'll now prepare a detailed report based on our conversation covering all 8 questions we discussed. You should hear back from our team regarding the next steps in the process soon.",
+      "input_tokens": 114,
+      "output_tokens": 84,
+      "total_tokens": 198,
+      "latency_ms": 4068
+    }
+  ]
+}
